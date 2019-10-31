@@ -1,2 +1,3 @@
-# reactjs-rocketshoes
-Bootcamp GoStack Rocketseat
+Bootcamp Rocketseat
+
+Projeto em ReactJS de e-commerce utilizando Redux, Redux Saga e Toastify.
