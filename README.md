@@ -1,6 +1,6 @@
 Bootcamp GoStack Rocketseat
 
-Aplicação em ReactJS de e-commerce utilizando Redux e Redux Saga.
+Aplicação em ReactJS de e-commerce utilizando Redux, Redux Saga e React Hooks.
 
 Clone o projeto, instale as dependencias com: 
 ```
