@@ -1,26 +1,42 @@
-import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import { ToastContainer } from 'react-toastify';
-
-import './config/reactotron';
-
-import GlobalStyle from './styles/global';
-import Header from './components/Header';
-import Routes from './routes';
-
-import store from './store';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 
 function App() {
+  const [tech, setTech] = useState([]);
+  const [newTech, setNewTech] = useState('');
+
+  const handleAdd = useCallback(() => {
+    setTech([...tech, newTech]);
+    setNewTech('');
+  }, [newTech, tech]);
+
+  useEffect(() => {
+    const storageTech = localStorage.getItem('tech');
+
+    if (storageTech) {
+      setTech(JSON.parse(storageTech));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('tech', JSON.stringify(tech));
+  }, [tech]);
+
+  const techSize = useMemo(() => tech.length, [tech]);
+
   return (
-    <Provider store={store}>
-      <BrowserRouter>
-        <Header />
-        <Routes />
-        <GlobalStyle />
-        <ToastContainer autoClose={3000} />
-      </BrowserRouter>
-    </Provider>
+    <>
+      <ul>
+        {tech.map(t => (
+          <li key={t}>{t}</li>
+        ))}
+      </ul>
+      <strong>Você tem {techSize} tecnologias</strong>
+      <br />
+      <input value={newTech} onChange={e => setNewTech(e.target.value)} />
+      <button type="button" onClick={handleAdd}>
+        Adicionar
+      </button>
+    </>
   );
 }
 
